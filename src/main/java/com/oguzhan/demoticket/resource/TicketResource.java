@@ -6,6 +6,7 @@ import com.oguzhan.demoticket.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class TicketResource {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Ticket save(Ticket ticket) {
+    public Ticket save(@RequestBody @Valid Ticket ticket) {
         return ticketService.save(ticket);
     }
 }

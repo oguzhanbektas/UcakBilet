@@ -3,11 +3,9 @@ package com.oguzhan.demoticket.resource;
 import com.oguzhan.demoticket.model.Route;
 import com.oguzhan.demoticket.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +27,7 @@ public class RouteResource {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Route save(Route route) {
+    public Route save(@RequestBody @Valid Route route) {
         return routeService.save(route);
     }
 }
