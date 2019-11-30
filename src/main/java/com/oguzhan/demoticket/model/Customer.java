@@ -14,4 +14,9 @@ public class Customer {
     private long id;
     @NotEmpty(message = "İsim boş olamaz")
     private String name;
+    @NotEmpty(message = "Soyad boş olamaz")
+    private String surname;
+    @NotEmpty(message = "Soyad boş olamaz")
+    @Column(unique = true, length = 11)
+    private String tc;
 }

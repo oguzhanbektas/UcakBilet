@@ -1,4 +1,4 @@
-package com.oguzhan.demoticket.resource;
+package com.oguzhan.demoticket.controller;
 
 import com.oguzhan.demoticket.model.Route;
 import com.oguzhan.demoticket.service.RouteService;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/route")
-public class RouteResource {
+public class RouteController {
     @Autowired
     RouteService routeService;
 
@@ -21,8 +21,7 @@ public class RouteResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Route> getAirport(@PathVariable long id) {
-        //System.out.println("İd -------------------" + id);
+    public Optional<Route> getRoute(@PathVariable long id) {
         return routeService.findById(id);
     }
 

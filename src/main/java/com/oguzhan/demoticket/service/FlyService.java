@@ -19,7 +19,6 @@ public class FlyService {
         return flyRepository.findAll();
     }
     public Fly save(Fly fly){
-        System.out.println("Service --> " + fly);
         return flyRepository.save(fly);
     }
 }

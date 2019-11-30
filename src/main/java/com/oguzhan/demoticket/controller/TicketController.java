@@ -1,6 +1,5 @@
-package com.oguzhan.demoticket.resource;
+package com.oguzhan.demoticket.controller;
 
-import com.oguzhan.demoticket.model.Route;
 import com.oguzhan.demoticket.model.Ticket;
 import com.oguzhan.demoticket.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/ticket")
-public class TicketResource {
+public class TicketController {
     @Autowired
     TicketService ticketService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Ticket> allRoute() {
+    public List<Ticket> allTicket() {
         return ticketService.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Ticket> getAirport(@PathVariable long id) {
-        //System.out.println("İd -------------------" + id);
+    public Optional<Ticket> getTicket(@PathVariable long id) {
         return ticketService.findById(id);
     }
 

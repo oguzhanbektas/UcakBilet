@@ -1,11 +1,9 @@
-package com.oguzhan.demoticket.resource;
+package com.oguzhan.demoticket.controller;
 
-import com.oguzhan.demoticket.model.Airport;
 import com.oguzhan.demoticket.model.Fly;
 import com.oguzhan.demoticket.service.FlyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,23 +11,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/fly")
-public class FlyResource {
+public class FlyController {
 
     @Autowired
     FlyService flyService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Fly> allAirport() {
+    public Iterable<Fly> allFly() {
         return flyService.findAll();
     }
 
-  /*  @RequestMapping(method = RequestMethod.GET)
-    public String a(){
-        return "aaa";
-    }*/
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Fly> getAirport(@PathVariable long id) {
+    public Optional<Fly> getFly(@PathVariable long id) {
         System.out.println("İd -------------------" + id);
         return flyService.findById(id);
     }

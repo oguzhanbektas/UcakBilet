@@ -1,4 +1,4 @@
-package com.oguzhan.demoticket.resource;
+package com.oguzhan.demoticket.controller;
 
 import com.oguzhan.demoticket.model.Airport;
 import com.oguzhan.demoticket.service.AirportService;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/airport")
 @CrossOrigin
-public class AirportResource {
+public class AirportController {
 
     @Autowired
     AirportService airportService;
@@ -23,7 +23,6 @@ public class AirportResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Optional<Airport> getAirport(@PathVariable long id) {
-        //System.out.println("İd -------------------" + id);
         return airportService.findById(id);
     }
 

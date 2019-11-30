@@ -22,7 +22,7 @@ public class AirlineBusinessService {
         return airlineBusinessRepository.findById(id);
     }
 
-    public AirlineBusiness save(AirlineBusiness airlineBusiness){
+    public AirlineBusiness save(AirlineBusiness airlineBusiness) {
         return airlineBusinessRepository.save(airlineBusiness);
     }
 }

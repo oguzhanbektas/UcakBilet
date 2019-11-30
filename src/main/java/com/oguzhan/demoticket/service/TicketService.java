@@ -29,9 +29,6 @@ public class TicketService {
         newTicket.setCustomer(ticket.getCustomer());
         newTicket.setFly(ticket.getFly());
         int quota = ticket.getFly().getAirlineBusiness().getQuota();
-        //ArrayList<Ticket> purchasedTickets = new ArrayList<Ticket>();
-        // purchasedTickets.add((Ticket) findAll());
-        //System.out.println(purchasedTickets);
         List<Ticket> myList = new ArrayList<>();
         myList = findAll();
         int purchased = 0;

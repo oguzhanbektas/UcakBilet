@@ -1,6 +1,5 @@
-package com.oguzhan.demoticket.resource;
+package com.oguzhan.demoticket.controller;
 
-import com.oguzhan.demoticket.model.Airport;
 import com.oguzhan.demoticket.model.Customer;
 import com.oguzhan.demoticket.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +10,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/customer")
-public class CustomerResource {
+public class CustomerController {
     @Autowired
     CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Customer> allAirport() {
+    public Iterable<Customer> allCustomer() {
         return customerService.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Customer> getAirport(@PathVariable long id) {
-        //System.out.println("İd -------------------" + id);
+    public Optional<Customer> getCustomer(@PathVariable long id) {
         return customerService.findById(id);
     }
 

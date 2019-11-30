@@ -1,4 +1,4 @@
-package com.oguzhan.demoticket.resource;
+package com.oguzhan.demoticket.controller;
 
 
 import com.oguzhan.demoticket.model.AirlineBusiness;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/airline-business")
-public class AirlineBusinessResource {
+public class AirlineBusinessController {
     @Autowired
     AirlineBusinessService airlineBusinessService;
 
