@@ -26,7 +26,7 @@ public class TicketController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Ticket save(@RequestBody @Valid Ticket ticket) {
+    public Ticket save(@RequestBody Ticket ticket) {
         return ticketService.save(ticket);
     }
 }
