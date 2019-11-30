@@ -25,6 +25,11 @@ public class TicketController {
         return ticketService.findById(id);
     }
 
+    @RequestMapping(value = "/pnr/{id}", method = RequestMethod.GET)
+    public Optional<Ticket> getPnr(@PathVariable String pnr) {
+        return ticketService.findByPnr(pnr);
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Ticket save(@RequestBody Ticket ticket) {
         return ticketService.save(ticket);

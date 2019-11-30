@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 @Service
 public class TicketService {
@@ -17,6 +18,10 @@ public class TicketService {
 
     public List<Ticket> findAll() {
         return ticketRepository.findAll();
+    }
+
+    public Optional<Ticket> findByPnr(String pnr){
+        return ticketRepository.findByPnr(pnr);
     }
 
     public Optional<Ticket> findById(long id) {
@@ -33,7 +38,12 @@ public class TicketService {
                 purchased = purchased + 1;
             }
         }
-       /* if (quota >= purchased) {
+        //Veri Tabanından gelen Date türü ile H2 nin Date türü farklı olduğu için döngülere girip bilet fiyatını hesaplıyamıyor.
+        ticket.setPrice(ticket.getFly().getConstPrice() * 1.1);
+        //PNR Oluşturma
+        //Kurallar --> Uçak Model + Rotanın Nereden Nereye Gideceği +Müşteri TC si
+        ticket.setPnr(ticket.getFly().getAirlineBusiness().getModel() + ticket.getFly().getRoute().getFrom().getId() + ticket.getFly().getRoute().getTo().getId()+ticket.getCustomer().getTc());
+        /* if (quota >= purchased) {
             if (quota / purchased == 1) {
                 ticket.setPrice(ticket.getFly().getConstPrice() * 1.1);
             } else if (quota / purchased == 2) {

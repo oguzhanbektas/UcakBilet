@@ -20,4 +20,5 @@ public class Ticket {
     @OneToOne
     private Fly fly;
     private double price;
+    private String pnr;
 }
