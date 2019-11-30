@@ -25,7 +25,7 @@ public class TicketController {
         return ticketService.findById(id);
     }
 
-    @RequestMapping(value = "/pnr/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/pnr/{pnr}", method = RequestMethod.GET)
     public Optional<Ticket> getPnr(@PathVariable String pnr) {
         return ticketService.findByPnr(pnr);
     }

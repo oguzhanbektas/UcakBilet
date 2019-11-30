@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket,Long> {
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    @Query("select p from Ticket p where p.pnr = ?1")
     public Optional<Ticket> findByPnr(String pnr);
 
 }
