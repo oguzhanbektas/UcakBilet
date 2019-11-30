@@ -20,7 +20,7 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Optional<Ticket> findByPnr(String pnr){
+    public Optional<Ticket> findByPnr(String pnr) {
         return ticketRepository.findByPnr(pnr);
     }
 
@@ -33,40 +33,39 @@ public class TicketService {
         List<Ticket> myList = new ArrayList<>();
         myList = findAll();
         int purchased = 0;
+        //Normalde if içinde bütün herşeyin And olması lazım ama date türünü eşleştirirken sıkıntı yaşadığım için Kontenjan çalışıyor mu diye
+        //Sadece Fly > Fro ve To kontrolü yapılmıştır.
         for (int i = 0; i < myList.size(); i++) {
-            if (myList.get(i).getFly().getFlyDate() == ticket.getFly().getFlyDate() && myList.get(i).getFly().getRoute() == ticket.getFly().getRoute()) {
+            if (myList.get(i).getFly().getFlyDate().equals(ticket.getFly().getFlyDate()) || myList.get(i).getFly().getRoute().getFrom().equals(ticket.getFly().getRoute().getFrom()) && myList.get(i).getFly().getRoute().getTo().equals(ticket.getFly().getRoute().getTo())) {
                 purchased = purchased + 1;
             }
         }
-        //Veri Tabanından gelen Date türü ile H2 nin Date türü farklı olduğu için döngülere girip bilet fiyatını hesaplıyamıyor.
-        ticket.setPrice(ticket.getFly().getConstPrice() * 1.1);
         //PNR Oluşturma
         //Kurallar --> Uçak Model + Rotanın Nereden Nereye Gideceği +Müşteri TC si
-        ticket.setPnr(ticket.getFly().getAirlineBusiness().getModel() + ticket.getFly().getRoute().getFrom().getId() + ticket.getFly().getRoute().getTo().getId()+ticket.getCustomer().getTc());
-        /* if (quota >= purchased) {
-            if (quota / purchased == 1) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.1);
-            } else if (quota / purchased == 2) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.2);
-            } else if (quota / purchased == 3) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.3);
-            } else if (quota / purchased == 4) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.4);
-            } else if (quota / purchased == 5) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.5);
-            } else if (quota / purchased == 6) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.6);
-            } else if (quota / purchased == 7) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.7);
-            } else if (quota / purchased == 8) {
-                ticket.setPrice(ticket.getFly().getConstPrice() * 1.8);
-            } else if (quota / purchased == 9) {
+        ticket.setPnr(ticket.getFly().getAirlineBusiness().getModel() + ticket.getFly().getRoute().getFrom().getId() + ticket.getFly().getRoute().getTo().getId() + ticket.getCustomer().getTc());
+        if (quota >= purchased) {
+            if ((100 * purchased) / quota > 89) {
                 ticket.setPrice(ticket.getFly().getConstPrice() * 1.9);
+            } else if ((100 * purchased) / quota < 90 && (100 * purchased) / quota > 79) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.8);
+            } else if ((100 * purchased) / quota < 80 && (100 * purchased) / quota > 69) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.7);
+            } else if ((100 * purchased) / quota < 70 && (100 * purchased) / quota > 59) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.6);
+            } else if ((100 * purchased) / quota < 60 && (100 * purchased) / quota > 49) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.5);
+            } else if ((100 * purchased) / quota < 50 && (100 * purchased) / quota > 39) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.4);
+            } else if ((100 * purchased) / quota < 40 && (100 * purchased) / quota > 29) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.3);
+            } else if ((100 * purchased) / quota < 30 && (100 * purchased) / quota > 19) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.2);
+            } else if ((100 * purchased) / quota < 20 && (100 * purchased) / quota > 9) {
+                ticket.setPrice(ticket.getFly().getConstPrice() * 1.1);
             } else {
                 ticket.setPrice(ticket.getFly().getConstPrice());
             }
-            System.out.println(ticket);
-        }*/
+        }
         return ticketRepository.save(ticket);
     }
 }
