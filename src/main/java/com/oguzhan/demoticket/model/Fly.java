@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -14,15 +15,15 @@ public class Fly {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotEmpty(message = "Sabit ücret boş olamaz")
+    @NotNull(message = "Sabit ücret boş olamaz")
     private double constPrice;
-    @NotEmpty(message = "Havayolu Şirketi boş olamaz")
+    @NotNull(message = "Havayolu Şirketi boş olamaz")
     @OneToOne
     private AirlineBusiness airlineBusiness;
-    @NotEmpty(message = "Rota boş olamaz")
+    @NotNull(message = "Rota boş olamaz")
     @OneToOne
     private Route route;
-    @NotEmpty(message = "Uçuş Tarihi boş olamaz")
+    @NotNull(message = "Uçuş Tarihi boş olamaz")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date flyDate;
 }

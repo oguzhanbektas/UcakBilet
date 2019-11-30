@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -11,10 +12,10 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotEmpty(message = "Uçuş Kalkış Yeri boş olamaz")
+    @NotNull(message = "Uçuş Kalkış Yeri boş olamaz")
     @OneToOne
     private Airport from;
-    @NotEmpty(message = "Uçuş İniş Yeri boş olamaz")
+    @NotNull(message = "Uçuş İniş Yeri boş olamaz")
     @OneToOne
     private Airport to;
 }
